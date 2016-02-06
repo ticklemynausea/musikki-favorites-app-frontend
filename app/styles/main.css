@@ -16,3 +16,7 @@ body {
     border-radius: 0;
     border-bottom-left-radius: 2px;
 }
+
+span.navbar-brand {
+    cursor: pointer;
+}

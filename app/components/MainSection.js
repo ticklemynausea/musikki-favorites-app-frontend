@@ -13,7 +13,25 @@ class MainSection extends React.Component {
 
     render() {
 
-        let content = <Welcome appState={this.props.appState} />;
+        let content;
+        switch (this.props.appState.currentPage) {
+
+            case 'welcome':
+                content = <Welcome appState={this.props.appState} />;
+                break;
+
+            case 'favorites':
+                content = <FavoritesList appState={this.props.appState} />;
+                break;
+
+            case 'search':
+                content = <SearchArtists appState={this.props.appState} />;
+                break
+
+            default:
+                content = <Welcome appState={this.props.appState} />;
+                break;
+        }
 
         return (
             <Grid>

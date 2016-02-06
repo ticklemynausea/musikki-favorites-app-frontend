@@ -16,7 +16,8 @@ class App extends React.Component {
                 userData: {
                 }
             },
-            menuItems: []
+            menuItems: [],
+            currentPage: 'welcome'
         };
 
     }
@@ -89,9 +90,10 @@ class App extends React.Component {
                 }
             },
             menuItems: [
-                { label: 'My Favorites', action: 'showMyFavorites' },
-                { label: 'Search Artists', action: 'showSearchArtists' }
-            ]
+                { label: 'My Favorites', action: 'favorites' },
+                { label: 'Search Artists', action: 'search' }
+            ],
+            currentPage: 'welcome'
         }
 
         this.setState(state);
@@ -108,7 +110,8 @@ class App extends React.Component {
                 userData: {
                 }
             },
-            menuItems: []
+            menuItems: [],
+            currentPage: 'welcome'
         }
 
         this.setState(state);
@@ -117,11 +120,18 @@ class App extends React.Component {
 
     }
 
+    setNavigation(target) {
+        console.log('setNav', target)
+        let state = this.state;
+        state.currentPage = target;
+        this.setState(state);
+    }
+
     render() {
 
         return (
             <div>
-                <Header appState={this.state} doLogIn={this.doLogIn.bind(this)} doLogOut={this.doLogOut.bind(this)} />
+                <Header appState={this.state} doLogIn={this.doLogIn.bind(this)} doLogOut={this.doLogOut.bind(this)} doNav={this.setNavigation.bind(this)} />
                 <MainSection appState={this.state} />
             </div>
         )

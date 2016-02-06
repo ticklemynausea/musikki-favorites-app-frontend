@@ -26,9 +26,14 @@ class Header extends React.Component {
         this.props.doLogOut()
     }
 
+    headerMenuClick(event, eventKey) {
+        this.props.doNav(eventKey)
+    }
+
     render() {
 
         let userMenu;
+        let that = this;
 
         if (this.props.appState.session.loggedIn) {
             userMenu = <UserLogout title='Logout' appState={this.props.appState} doFn={this.doLogOut.bind(this)} />
@@ -39,17 +44,17 @@ class Header extends React.Component {
         return (
             <Navbar id='mainNavBar' fixedTop inverse fluid>
                 <Navbar.Header>
-                    <Navbar.Brand>
+                    <Navbar.Brand onClick={this.headerMenuClick.bind(this, '', 'welcome')}>
                         My Favorite Artists
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                    <Nav>
+                    <Nav onSelect={this.headerMenuClick.bind(this)}>
                         {
                             this.props.appState.menuItems.map(function(item, n) {
                                 return (
-                                    <MenuItem key={n}>{item.label}</MenuItem>
+                                    <MenuItem key={n} eventKey={item.action}>{item.label}</MenuItem>
                                 )
                             })
                         }
