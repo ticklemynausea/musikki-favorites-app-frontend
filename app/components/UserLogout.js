@@ -32,7 +32,7 @@ class UserLogout extends React.Component {
                 <form>
                     <Image src={this.state.image} thumbnail />
                     <hr/>
-                    <ButtonInput onClick={this.props.doFn} bsSize='small' type='submit' value='Logout' />
+                    <ButtonInput onClick={this.props.doFn} bsSize='small' value='Logout' />
                 </form>
             </NavDropdown>
         )

@@ -32,6 +32,7 @@ class App extends React.Component {
             console.log('cdm', session)
 
             if (session.loggedIn) {
+                console.log('setting loggedIn from stored session')
                 this.setLoggedIn(session.userData)
             } else {
                 this.setLoggedOut()
@@ -66,7 +67,7 @@ class App extends React.Component {
         let that = this
 
         API.post('/user/logout', {}).then(function(response) {
-
+            console.log('api logout response')
             if (response.status === 'ok') {
 
                 that.setLoggedOut()
@@ -114,9 +115,9 @@ class App extends React.Component {
             currentPage: 'welcome'
         }
 
-        this.setState(state);
         API.setSession(false);
         localStorage.setItem('session', JSON.stringify(state.session))
+        this.setState(state);
 
     }
 

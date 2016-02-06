@@ -20,3 +20,25 @@ body {
 span.navbar-brand {
     cursor: pointer;
 }
+
+img.img-thumbnail {
+    width: 100px;
+    height: 100px;
+}
+
+ul.artist-list {
+    padding: 0;
+}
+
+ul.artist-list li {
+    list-style-type: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 2px;
+}
+
+ul.artist-list li h2 {
+    margin-left: 10px;
+    display: inline-block;
+}

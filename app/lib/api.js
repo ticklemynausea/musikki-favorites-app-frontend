@@ -12,6 +12,8 @@ class API {
 
     static request(endpoint, method, data) {
 
+        let jsondata = !!data ? JSON.stringify(data) : undefined;
+
         let headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -24,8 +26,7 @@ class API {
         return fetch(config.api.backend.url + endpoint, {
             method: method,
             headers: headers,
-            body: JSON.stringify(data)
-
+            body: jsondata
         }).then(function(response) {
 
             if (response.status >= 200 && response.status < 300) {
@@ -39,8 +40,8 @@ class API {
         });
     }
 
-    static get(endpoint, data) {
-        return API.request(endpoint, 'get', data)
+    static get(endpoint) {
+        return API.request(endpoint, 'get', null)
     }
 
     static post(endpoint, data) {
