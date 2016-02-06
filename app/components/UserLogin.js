@@ -10,18 +10,21 @@ class UserLogin extends React.Component {
         super(props)
 
         this.state = {
-            open: false
+            open: false,
+            fields: {
+                username: '',
+                password: ''
+            }
         }
 
         this.onToggle = this.onToggle.bind(this)
         this.inputWasClicked = this.inputWasClicked.bind(this)
+        this.inputWasTabbed = this.inputWasTabbed.bind(this)
         this.loginWasClicked = this.loginWasClicked.bind(this)
 
     }
 
     componentDidMount() {
-
-        console.log('UserLogin props', this.props)
 
     }
 
@@ -44,13 +47,27 @@ class UserLogin extends React.Component {
 
     }
 
+    inputWasChanged(field, e) {
+        console.log('!')
+        let newState = this.state;
+
+        newState.fields[field] = e.target.value;
+        this.setState(newState)
+
+    }
+
+    inputWasTabbed() {
+        console.log('tab')
+    }
+
     loginWasClicked() {
 
-        this.setState({
-            open: false
-        })
+        let newState = this.state;
 
-        this.props.doFn()
+        newState.open = false;
+        this.setState(newState)
+
+        this.props.doFn(this.state.fields)
     }
 
     render() {
@@ -60,10 +77,16 @@ class UserLogin extends React.Component {
                          onToggle={this.onToggle}
                          open={this.state.open}>
 
-                <Input onSelect={this.inputWasClicked} bsSize='small' type='text'
+                <Input onSelect={this.inputWasClicked}
+                       onChange={this.inputWasChanged.bind(this, 'username')}
+                       onBlur={this.inputWasTabbed}
+                       bsSize='small' type='text'
                        label='Username' placeholder='Enter text' />
 
-                <Input onSelect={this.inputWasClicked} bsSize='small' type='password'
+                <Input onSelect={this.inputWasClicked}
+                       onChange={this.inputWasChanged.bind(this, 'password')}
+                       onBlur={this.inputWasTabbed}
+                       bsSize='small' type='password'
                        label='Password' placeholder='Enter text' />
 
                 <ButtonInput onClick={this.loginWasClicked} bsSize='small' type='submit'

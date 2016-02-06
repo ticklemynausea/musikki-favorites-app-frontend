@@ -12,17 +12,14 @@ class Header extends React.Component {
 
     componentDidMount() {
 
-        console.log('Header.componentDidMount props', this.props)
-
     }
 
     componentDidUpdate() {
-        console.log('Header.componentDidUpdate props', this.props)
+
     }
 
-    doLogIn() {
-        console.log(this.state)
-        this.props.doLogIn()
+    doLogIn(formData) {
+        this.props.doLogIn(formData)
     }
 
     doLogOut() {
@@ -34,9 +31,9 @@ class Header extends React.Component {
         let userMenu;
 
         if (this.props.appState.session.loggedIn) {
-            userMenu = <UserLogout appState={this.props.appState} doFn={this.doLogOut.bind(this)} />
+            userMenu = <UserLogout title='Logout' appState={this.props.appState} doFn={this.doLogOut.bind(this)} />
         } else {
-            userMenu = <UserLogin appState={this.props.appState} title='Login' doFn={this.doLogIn.bind(this)} />
+            userMenu = <UserLogin title='Login' appState={this.props.appState} doFn={this.doLogIn.bind(this)} />
         }
 
         return (

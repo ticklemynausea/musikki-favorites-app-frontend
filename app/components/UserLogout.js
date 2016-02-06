@@ -1,23 +1,38 @@
 import React from 'react';
-import { NavDropdown, MenuItem, ButtonInput } from 'react-bootstrap';
+import { NavDropdown, MenuItem, ButtonInput, Image, Grid, Row, Col } from 'react-bootstrap';
 
 class UserLogout extends React.Component {
 
+    constructor() {
+        super()
+
+        this.state = {
+            image: 'http://www.gravatar.com/avatar'
+        }
+    }
+
     componentDidMount() {
-        console.log('UserLogout')
-        console.log(this.props)
+
+    }
+
+    getGravatarURL(email) {
+        let md5 = require('md5')
+        let hash = !!email ? md5(email) : ''
+        return '//www.gravatar.com/avatar/' + hash
     }
 
     render() {
+
+        this.state = {
+            image: this.getGravatarURL(this.props.appState.session.userData.email)
+        }
+
         return (
             <NavDropdown title={this.props.appState.session.userData.username} id='collapsible-navbar-dropdown'>
                 <form>
-                    <MenuItem>
-                        <img src={this.props.appState.session.userData.avatar} />
-                    </MenuItem>
-                    <MenuItem>
-                        <ButtonInput onClick={this.props.doFn} bsSize='small' type='submit' value='Logout' />
-                    </MenuItem>
+                    <Image src={this.state.image} thumbnail />
+                    <hr/>
+                    <ButtonInput onClick={this.props.doFn} bsSize='small' type='submit' value='Logout' />
                 </form>
             </NavDropdown>
         )
