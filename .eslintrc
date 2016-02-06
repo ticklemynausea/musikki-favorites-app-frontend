@@ -67,9 +67,9 @@
     "no-func-assign": 2,
     "no-undef": 2,
     "no-unreachable": 2,
-    "no-unused-vars": 2,
+    //"no-unused-vars": 2,
     "block-scoped-var": 2,
-    "no-console": 1, // Warn so we don't commit console.logs
+    //"no-console": 1, // Warn so we don't commit console.logs
     "no-debugger": 1,
     "no-alert": 2,
 
@@ -87,7 +87,7 @@
 
     "no-undefined": 2,
 
-    "no-unused-vars": 2,
+    // "no-unused-vars": 2,
 
     //-------------------------------------------------------------------------
     // Code style
@@ -104,7 +104,7 @@
 
     //"eol-last": 2,
 
-    "indent": [2, 2],
+    //"indent": [2, 2],
 
     "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
 
