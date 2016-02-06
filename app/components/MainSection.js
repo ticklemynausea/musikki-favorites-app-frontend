@@ -11,13 +11,17 @@ class MainSection extends React.Component {
         console.log('MainSection', this.props)
     }
 
+    doLetsGo() {
+        this.props.doLetsGo()
+    }
+
     render() {
 
         let content;
         switch (this.props.appState.currentPage) {
 
             case 'welcome':
-                content = <Welcome appState={this.props.appState} />;
+                content = <Welcome appState={this.props.appState} doLetsGo={this.doLetsGo.bind(this)} />;
                 break;
 
             case 'favorites':
@@ -29,7 +33,6 @@ class MainSection extends React.Component {
                 break
 
             default:
-                content = <Welcome appState={this.props.appState} />;
                 break;
         }
 

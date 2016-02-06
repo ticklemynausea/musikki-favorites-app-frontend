@@ -1,5 +1,6 @@
 import React from 'react';
 import API from '../lib/api'
+import ArtistItem from '../components/ArtistItem'
 import { Input } from 'react-bootstrap';
 
 class SearchArtists extends React.Component {
@@ -8,6 +9,11 @@ class SearchArtists extends React.Component {
 
         super()
 
+        this.state = {
+            searchArtists: [],
+            timeout: null
+        }
+
     }
 
     componentDidMount() {
@@ -15,19 +21,65 @@ class SearchArtists extends React.Component {
     }
 
     handleChange(event) {
-        let value = event.target.value
-        API.get('/artist/' + value).then(function(response) {
-            console.log(response);
-        });
+
+        let value = event.target.value.replace(' ', '+')
+        let that = this
+
+        if (!!value) {
+
+            if (!!this.state.timeout) {
+                clearTimeout(this.state.timeout);
+            }
+
+            this.state.timeout = setTimeout(function() {
+
+                API.get('/artist/' + value).then(function(response) {
+                    that.setState({
+                        searchArtists: response
+                    })
+                });
+
+            }, 500);
+
+            /* */
+
+        } else {
+
+            that.setState({
+                searchArtists: [],
+                timeout: null
+            })
+
+        }
     }
 
     render() {
+
+        let content;
+
+        if (this.state.searchArtists.length > 0) {
+            content = (
+                <ul className='artist-list'>
+                    {
+                        this.state.searchArtists.map(function(artist, n) {
+                            return (
+                                <ArtistItem key={n} artist={artist} />
+                            )
+                        })
+                    }
+                </ul>
+            )
+        } else {
+            content = (
+                <h2>No results found!</h2>
+            )
+        }
+
         return (
             <div>
-                <h1>Search Artists</h1>
+                <h1>Find your artists!</h1>
                 <Input type='text' placeholder='Search your artists!' onChange={this.handleChange.bind(this)} />
-                <ul>
-                </ul>
+                {content}
             </div>
         )
     }

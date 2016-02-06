@@ -38,8 +38,9 @@ class FavoritesList extends React.Component {
                 <ul className='artist-list'>
                     {
                         this.state.favoriteArtists.map(function(artist, n) {
+                            artist.favorite = true
                             return (
-                                <ArtistItem artist={artist} />
+                                <ArtistItem key={n} artist={artist} />
                             )
                         })
                     }

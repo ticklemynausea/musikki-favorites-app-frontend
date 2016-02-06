@@ -11,21 +11,28 @@ class Welcome extends React.Component {
         console.log('Welcome didUpdate', this.props)
     }
 
+    doLetsGo() {
+        this.props.doLetsGo()
+    }
+
     render() {
 
         let title;
+        let button;
 
         if (this.props.appState.session.loggedIn) {
-            title = (<h1>Olá {this.props.appState.session.userData.username}</h1>);
+            title = (<h1>Hello {this.props.appState.session.userData.username}</h1>);
+            button = (<Button bsStyle='primary' onClick={this.doLetsGo.bind(this)}>Let&apos;s go!</Button>)
         } else {
             title = (<h1>My Favorite Artists</h1>);
+            button = null;
         }
 
         return (
             <Jumbotron>
                 {title}
-                <p>Através desta fantástica demo poderás marcar os teus artistas favoritos!</p>
-                <p><Button bsStyle='primary'>Siga!</Button></p>
+                <p>With this demo you can make a list of your favorite artists!</p>
+                <p>{button}</p>
             </Jumbotron>
         )
     }

@@ -133,7 +133,7 @@ class App extends React.Component {
         return (
             <div>
                 <Header appState={this.state} doLogIn={this.doLogIn.bind(this)} doLogOut={this.doLogOut.bind(this)} doNav={this.setNavigation.bind(this)} />
-                <MainSection appState={this.state} />
+                <MainSection appState={this.state} doLetsGo={this.setNavigation.bind(this, 'search')} />
             </div>
         )
 
