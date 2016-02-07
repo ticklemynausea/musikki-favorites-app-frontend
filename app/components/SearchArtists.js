@@ -25,13 +25,15 @@ class SearchArtists extends React.Component {
         let value = event.target.value.replace(' ', '+')
         let that = this
 
-        if (!!value) {
 
-            if (!!this.state.timeout) {
-                clearTimeout(this.state.timeout);
-            }
+        if (!!this.state.timeout) {
+            clearTimeout(this.state.timeout);
+        }
 
-            this.state.timeout = setTimeout(function() {
+        this.state.timeout = setTimeout(function() {
+
+
+            if (!!value) {
 
                 API.get('/artist/' + value).then(function(response) {
                     that.setState({
@@ -39,18 +41,18 @@ class SearchArtists extends React.Component {
                     })
                 });
 
-            }, 500);
+            } else {
 
-            /* */
+                that.setState({
+                    searchArtists: [],
+                    timeout: null
+                })
 
-        } else {
+            }
 
-            that.setState({
-                searchArtists: [],
-                timeout: null
-            })
+        }, 500);
 
-        }
+
     }
 
     render() {
