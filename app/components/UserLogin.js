@@ -10,17 +10,11 @@ class UserLogin extends React.Component {
         super(props)
 
         this.state = {
-            open: false,
             fields: {
                 username: '',
                 password: ''
             }
         }
-
-        this.onToggle = this.onToggle.bind(this)
-        this.inputWasClicked = this.inputWasClicked.bind(this)
-        this.inputWasTabbed = this.inputWasTabbed.bind(this)
-        this.loginWasClicked = this.loginWasClicked.bind(this)
 
     }
 
@@ -28,71 +22,38 @@ class UserLogin extends React.Component {
 
     }
 
-    onToggle(open) {
-
-        if (this.state.inputWasClicked) {
-          this.state.inputWasClicked = false;
-          return;
-        }
-
-        this.setState({
-            open: open
-        });
-
-    }
-
-    inputWasClicked() {
-
-        this.state.inputWasClicked = true;
-
-    }
-
-    inputWasChanged(field, e) {
+    onInputChange(field, e) {
         console.log('!')
         let newState = this.state;
-
         newState.fields[field] = e.target.value;
         this.setState(newState)
-
     }
 
-    inputWasTabbed() {
-        console.log('tab')
-    }
+    onFormSubmit(event) {
 
-    loginWasClicked() {
+        event.preventDefault()
 
         let newState = this.state;
-
         newState.open = false;
         this.setState(newState)
-
         this.props.doFn(this.state.fields)
+
     }
 
     render() {
 
         return (
-            <NavDropdown title={this.props.title} id='dropdown-custom-menu'
-                         onToggle={this.onToggle}
-                         open={this.state.open}>
 
-                <Input onSelect={this.inputWasClicked}
-                       onChange={this.inputWasChanged.bind(this, 'username')}
-                       onBlur={this.inputWasTabbed}
-                       bsSize='small' type='text'
-                       label='Username' placeholder='Enter text' />
+            <form id='login-form' onSubmit={this.onFormSubmit.bind(this)} >
 
-                <Input onSelect={this.inputWasClicked}
-                       onChange={this.inputWasChanged.bind(this, 'password')}
-                       onBlur={this.inputWasTabbed}
-                       bsSize='small' type='password'
-                       label='Password' placeholder='Enter text' />
+              <input onChange={this.onInputChange.bind(this, 'username')} bsSize='small' type='text' placeholder='username' className='form-control' />
 
-                <ButtonInput onClick={this.loginWasClicked} bsSize='small' type='submit'
-                       value='Login' />
+              <input onChange={this.onInputChange.bind(this, 'password')} bsSize='small' type='password' placeholder='password' className='form-control' />
 
-            </NavDropdown>
+              <input bsSize='small' type='submit' value='Login' className='btn btn-primary' />
+
+            </form>
+
         );
 
 

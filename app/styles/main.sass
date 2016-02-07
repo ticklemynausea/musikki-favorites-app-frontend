@@ -8,14 +8,32 @@ body
 #mainNavBar
     border-radius: 0
 
+    a#collapsible-navbar-dropdown[aria-expanded=true]
+        background-color: #111 !important
+
     ul.dropdown-menu
         color: #fff
-        background-color: #080808
+        background-color: #111
         min-width: 200px
         padding: 10px
         border: 0
         border-radius: 0
         border-bottom-left-radius: 2px
+
+    form#login-form
+
+        margin-top: 8px
+
+        input
+            display: inline-block
+            margin-right: 8px
+
+        input[type=text], input[type=password]
+            width: 120px
+
+        input[type=submit]
+            margin-top: -3px;
+            width: 100px
 
 span.navbar-brand
     cursor: pointer

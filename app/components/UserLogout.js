@@ -28,7 +28,7 @@ class UserLogout extends React.Component {
         }
 
         return (
-            <NavDropdown title={this.props.appState.session.userData.username} id='collapsible-navbar-dropdown'>
+            <NavDropdown id='collapsible-navbar-dropdown' title={this.props.appState.session.userData.username}>
                 <form>
                     <Image src={this.state.image} thumbnail />
                     <hr/>
