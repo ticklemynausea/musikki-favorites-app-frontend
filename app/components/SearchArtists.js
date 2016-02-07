@@ -71,13 +71,14 @@ class SearchArtists extends React.Component {
             )
         } else {
             content = (
-                <h2>No results found!</h2>
+                <p>No results found!</p>
             )
         }
 
         return (
             <div>
                 <h1>Find your artists!</h1>
+                <hr />
                 <Input type='text' placeholder='Search your artists!' onChange={this.handleChange.bind(this)} />
                 {content}
             </div>

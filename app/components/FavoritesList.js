@@ -48,13 +48,14 @@ class FavoritesList extends React.Component {
             )
         } else {
             content = (
-                <h2>No favorite artists were picked!</h2>
+                <p>No favorite artists were picked!</p>
             )
         }
 
         return (
             <div>
                 <h1>My Favorites</h1>
+                <hr />
                 {content}
             </div>
         )

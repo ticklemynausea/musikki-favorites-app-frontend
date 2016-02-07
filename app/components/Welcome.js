@@ -21,7 +21,7 @@ class Welcome extends React.Component {
         let button;
 
         if (this.props.appState.session.loggedIn) {
-            title = (<h1>Hello {this.props.appState.session.userData.username}</h1>);
+            title = (<h1>Hello {this.props.appState.session.userData.username}!</h1>);
             button = (<Button bsStyle='primary' onClick={this.doLetsGo.bind(this)}>Let&apos;s go!</Button>)
         } else {
             title = (<h1>My Favorite Artists</h1>);

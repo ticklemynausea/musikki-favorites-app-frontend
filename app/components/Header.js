@@ -1,7 +1,7 @@
 import React from 'react';
 import UserLogin from './UserLogin';
 import UserLogout from './UserLogout';
-import { Navbar, Nav, MenuItem } from 'react-bootstrap';
+import { Navbar, Nav, MenuItem, Glyphicon } from 'react-bootstrap';
 
 class Header extends React.Component {
 
@@ -45,7 +45,7 @@ class Header extends React.Component {
             <Navbar id='mainNavBar' fixedTop inverse fluid>
                 <Navbar.Header>
                     <Navbar.Brand onClick={this.headerMenuClick.bind(this, '', 'welcome')}>
-                        My Favorite Artists
+                        <Glyphicon glyph='star' /> My Favorite Artists
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
