@@ -9,7 +9,7 @@ class ArtistList extends React.Component {
             <ul className='artist-list'>
                 {
                     this.props.artistList.map((artist, n) => {
-                        artist.favorite = !!this.props.isFavoriteList;
+                        artist.favorite = this.props.isFavoriteList ? true : artist.favorite;
                         return (
                             <ArtistItem key={n} artist={artist} />
                         );
