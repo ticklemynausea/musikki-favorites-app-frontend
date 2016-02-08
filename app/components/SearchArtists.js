@@ -60,7 +60,7 @@ class SearchArtists extends React.Component {
             <div>
                 <h1>Find your artists!</h1>
                 <hr />
-                <Input type='text' placeholder='Search your artists!' onChange={this.handleChange.bind(this)} />
+                <Input bsSize='large' type='text' placeholder='Search your artists!' onChange={this.handleChange.bind(this)} />
                 {content}
             </div>
         );
