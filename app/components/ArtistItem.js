@@ -72,17 +72,34 @@ class ArtistItem extends React.Component {
             action = this.addFavorite.bind(this);
         }
 
-        let favoriteButton = (
-            <div onClick={action} className={ 'favorite-button ' + (!action ? 'loading' : '') }>
-                <Glyphicon glyph={glyph} />
-            </div>
-        );
+        let country = !!this.props.artist.country ? (<p>{this.props.artist.country}</p>) : (<p>&nbsp;</p>);
+
+        let dates;
+        if (!!this.props.artist.start_date) {
+            dates = '' + this.props.artist.start_date;
+
+            if (!!this.props.artist.end_date) {
+                dates += ' — ' + this.props.artist.end_date;
+            } else {
+                dates += ' — present';
+            }
+        }
+        dates = (<p>{dates}</p>);
+
 
         return (
-            <li>
-                <Image src={this.props.artist.image_url} thumbnail title={this.props.artist.id} />
-                <h2>{this.props.artist.name}</h2>
-                {favoriteButton}
+            <li> 
+                <div className='artist-image'>
+                    <Image src={this.props.artist.image_url} thumbnail title={this.props.artist.id} />
+                </div>
+                <div className='artist-info'>
+                    <h2>{this.props.artist.name}</h2>
+                    {country}
+                    {dates}
+                </div>
+                <div onClick={action} className={ 'favorite-button ' + (!action ? 'loading' : '') }>
+                    <Glyphicon glyph={glyph} />
+                </div>
             </li>
         );
     }
