@@ -25,7 +25,7 @@ class ArtistItem extends React.Component {
         this.state.loading = true;
         this.setState(this.state);
 
-        API.post('/favorite/add/' + this.props.artist.id).then((response) => {
+        API.post('/favorites/add/' + this.props.artist.id).then((response) => {
 
             this.state.loading = false;
 
@@ -50,7 +50,7 @@ class ArtistItem extends React.Component {
         this.state.loading = true;
         this.setState(this.state);
 
-        API.post('/favorite/remove/' + this.props.artist.id).then((response) => {
+        API.post('/favorites/remove/' + this.props.artist.id).then((response) => {
 
             this.state.loading = false;
 

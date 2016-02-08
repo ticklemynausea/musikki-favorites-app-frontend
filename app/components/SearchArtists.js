@@ -30,7 +30,7 @@ class SearchArtists extends React.Component {
 
             if (!!value) {
 
-                API.get('/artist/' + value).then((response) => {
+                API.get('/artists/' + value).then((response) => {
                     this.setState({
                         searchArtists: response
                     });

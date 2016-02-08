@@ -18,7 +18,7 @@ class FavoritesList extends React.Component {
 
     componentDidMount() {
 
-        API.get('/favorite').then((response) => {
+        API.get('/favorites').then((response) => {
             this.setState({
                 favoriteArtists: response
             });
