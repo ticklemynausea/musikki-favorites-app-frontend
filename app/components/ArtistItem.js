@@ -34,6 +34,13 @@ class ArtistItem extends React.Component {
                 this.setState(this.state);
             }
 
+        }).catch((error) => {
+
+                console.error(error);
+
+                this.state.loading = false;
+                this.setState(this.state);
+
         });
 
     }
@@ -51,6 +58,13 @@ class ArtistItem extends React.Component {
                 this.state.favorite = false;
                 this.setState(this.state);
             }
+
+        }).catch((error) => {
+
+                console.error(error);
+
+                this.state.loading = false;
+                this.setState(this.state);
 
         });
 
