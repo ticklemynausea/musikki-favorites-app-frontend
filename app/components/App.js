@@ -17,6 +17,7 @@ class App extends React.Component {
                 }
             },
             menuItems: [],
+            failedLogin: false,
             currentPage: 'welcome'
         };
 
@@ -49,6 +50,23 @@ class App extends React.Component {
 
             if (response.status === 'ok') {
                this.setLoggedIn(response);
+            }
+
+        }, (error) => {
+
+            if (error.response.status === 403) {
+
+                this.state.failedLogin = true;
+                this.setState(this.state);
+
+                if (!!this.state.timeout) {
+                    clearTimeout(this.state.timeout);
+                }
+
+                this.state.timeout = setTimeout(() => {
+                    this.state.failedLogin = false;
+                    this.setState(this.state);
+                }, 1000);
             }
 
         });
@@ -84,6 +102,7 @@ class App extends React.Component {
                 { label: 'My Favorites', action: 'favorites' },
                 { label: 'Search Artists', action: 'search' }
             ],
+            failedLogin: false,
             currentPage: 'welcome'
         };
 
@@ -102,6 +121,7 @@ class App extends React.Component {
                 }
             },
             menuItems: [],
+            failedLogin: false,
             currentPage: 'welcome'
         };
 
