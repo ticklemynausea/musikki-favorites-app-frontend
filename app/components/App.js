@@ -133,8 +133,10 @@ class App extends React.Component {
 
     setNavigation(target) {
 
-        this.state.currentPage = target;
-        this.setState(this.state);
+        if (this.state.currentPage !== target) {
+            this.state.currentPage = target;
+            this.setState(this.state);
+        }
     }
 
     render() {
