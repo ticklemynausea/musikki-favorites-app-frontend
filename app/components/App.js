@@ -54,7 +54,7 @@ class App extends React.Component {
 
         }, (error) => {
 
-            if (error.response.status === 403) {
+            if (error.response.status === 401) {
 
                 this.state.failedLogin = true;
                 this.setState(this.state);
