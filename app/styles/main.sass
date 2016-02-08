@@ -52,13 +52,14 @@ ul.artist-list
         border: 1px solid #ccc
         border-radius: 4px
         margin: 2px
+        height: 110px
 
         h2
             margin-left: 10px
             display: inline-block
 
 
-        div
+        div.favorite-button
             width: 100px
             height: 108px
             line-height: 108px
@@ -68,11 +69,12 @@ ul.artist-list
             font-size: 40px
             cursor: pointer
 
-
             &:active
                 background: #eee
                 color: #000
 
-
             span
-                line-height: 108px
+                line-height: 110px
+
+        div.favorite-button.loading
+            cursor: auto

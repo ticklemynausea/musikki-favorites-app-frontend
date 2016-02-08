@@ -7,14 +7,14 @@ class UserLogin extends React.Component {
 
     constructor(props) {
 
-        super(props)
+        super(props);
 
         this.state = {
             fields: {
                 username: '',
                 password: ''
             }
-        }
+        };
 
     }
 
@@ -23,20 +23,17 @@ class UserLogin extends React.Component {
     }
 
     onInputChange(field, e) {
-        console.log('!')
-        let newState = this.state;
-        newState.fields[field] = e.target.value;
-        this.setState(newState)
+        this.state.fields[field] = e.target.value;
+        this.setState(this.state);
     }
 
     onFormSubmit(event) {
 
-        event.preventDefault()
+        event.preventDefault();
 
-        let newState = this.state;
-        newState.open = false;
-        this.setState(newState)
-        this.props.doFn(this.state.fields)
+        this.state.open = false;
+        this.setState(this.state);
+        this.props.doFn(this.state.fields);
 
     }
 

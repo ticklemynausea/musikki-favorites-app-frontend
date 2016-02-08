@@ -1,52 +1,47 @@
 import React from 'react';
-import API from '../lib/api'
-import ArtistItem from '../components/ArtistItem'
+import API from '../lib/API';
+import ArtistList from '../components/ArtistList';
 import { Input } from 'react-bootstrap';
 
 class SearchArtists extends React.Component {
 
     constructor() {
 
-        super()
+        super();
 
         this.state = {
             searchArtists: [],
             timeout: null
-        }
-
-    }
-
-    componentDidMount() {
+        };
 
     }
 
     handleChange(event) {
 
-        let value = event.target.value.replace(' ', '+')
-        let that = this
+        let value = event.target.value.replace(' ', '+');
 
 
         if (!!this.state.timeout) {
             clearTimeout(this.state.timeout);
         }
 
-        this.state.timeout = setTimeout(function() {
+        this.state.timeout = setTimeout(() => {
 
 
             if (!!value) {
 
-                API.get('/artist/' + value).then(function(response) {
-                    that.setState({
+                API.get('/artist/' + value).then((response) => {
+                    this.setState({
                         searchArtists: response
-                    })
+                    });
                 });
 
             } else {
 
-                that.setState({
+                this.setState({
                     searchArtists: [],
                     timeout: null
-                })
+                });
 
             }
 
@@ -57,25 +52,9 @@ class SearchArtists extends React.Component {
 
     render() {
 
-        let content;
-
-        if (this.state.searchArtists.length > 0) {
-            content = (
-                <ul className='artist-list'>
-                    {
-                        this.state.searchArtists.map(function(artist, n) {
-                            return (
-                                <ArtistItem key={n} artist={artist} />
-                            )
-                        })
-                    }
-                </ul>
-            )
-        } else {
-            content = (
-                <p>No results found!</p>
-            )
-        }
+        let content = (this.state.searchArtists.length > 0) ?
+            (<ArtistList artistList={this.state.searchArtists} />) :
+            (<p>No results found!</p>);
 
         return (
             <div>
@@ -84,7 +63,7 @@ class SearchArtists extends React.Component {
                 <Input type='text' placeholder='Search your artists!' onChange={this.handleChange.bind(this)} />
                 {content}
             </div>
-        )
+        );
     }
 
 }

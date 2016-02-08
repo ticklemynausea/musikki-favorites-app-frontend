@@ -6,13 +6,8 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 class MainSection extends React.Component {
 
-
-    componentDidMount() {
-        console.log('MainSection', this.props)
-    }
-
     doLetsGo() {
-        this.props.doLetsGo()
+        this.props.doLetsGo();
     }
 
     render() {
@@ -30,7 +25,7 @@ class MainSection extends React.Component {
 
             case 'search':
                 content = <SearchArtists appState={this.props.appState} />;
-                break
+                break;
 
             default:
                 break;
@@ -44,7 +39,7 @@ class MainSection extends React.Component {
                     </Col>
                 </Row>
             </Grid>
-        )
+        );
     }
 
 }

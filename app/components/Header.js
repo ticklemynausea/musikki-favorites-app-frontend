@@ -6,7 +6,7 @@ import { Navbar, Nav, MenuItem, Glyphicon } from 'react-bootstrap';
 class Header extends React.Component {
 
     constructor() {
-        super()
+        super();
 
     }
 
@@ -19,26 +19,25 @@ class Header extends React.Component {
     }
 
     doLogIn(formData) {
-        this.props.doLogIn(formData)
+        this.props.doLogIn(formData);
     }
 
     doLogOut() {
-        this.props.doLogOut()
+        this.props.doLogOut();
     }
 
     headerMenuClick(event, eventKey) {
-        this.props.doNav(eventKey)
+        this.props.doNav(eventKey);
     }
 
     render() {
 
         let userMenu;
-        let that = this;
 
         if (this.props.appState.session.loggedIn) {
-            userMenu = <UserLogout title='Logout' appState={this.props.appState} doFn={this.doLogOut.bind(this)} />
+            userMenu = <UserLogout title='Logout' appState={this.props.appState} doFn={this.doLogOut.bind(this)} />;
         } else {
-            userMenu = <UserLogin title='Login' appState={this.props.appState} doFn={this.doLogIn.bind(this)} />
+            userMenu = <UserLogin title='Login' appState={this.props.appState} doFn={this.doLogIn.bind(this)} />;
         }
 
         return (
@@ -52,10 +51,10 @@ class Header extends React.Component {
                 <Navbar.Collapse>
                     <Nav onSelect={this.headerMenuClick.bind(this)}>
                         {
-                            this.props.appState.menuItems.map(function(item, n) {
+                            this.props.appState.menuItems.map((item, n) => {
                                 return (
                                     <MenuItem key={n} eventKey={item.action}>{item.label}</MenuItem>
-                                )
+                                );
                             })
                         }
                     </Nav>
@@ -69,4 +68,4 @@ class Header extends React.Component {
 
 }
 
-export default Header
+export default Header;

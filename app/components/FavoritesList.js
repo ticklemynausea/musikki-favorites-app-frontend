@@ -1,28 +1,29 @@
 import React from 'react';
-import API from '../lib/api'
-import ArtistItem from '../components/ArtistItem'
+import API from '../lib/API';
+import ArtistList from '../components/ArtistList';
 import { Input } from 'react-bootstrap';
 
 class FavoritesList extends React.Component {
 
     constructor() {
 
-        super()
+        super();
 
         this.state = {
             favoriteArtists: []
-        }
+        };
 
 
     }
 
     componentDidMount() {
-        let that = this
-        API.get('/favorite').then(function(response) {
-            that.setState({
+
+        API.get('/favorite').then((response) => {
+            this.setState({
                 favoriteArtists: response
-            })
+            });
         });
+
     }
 
     handleChange(event) {
@@ -31,26 +32,9 @@ class FavoritesList extends React.Component {
 
     render() {
 
-        let content;
-
-        if (this.state.favoriteArtists.length > 0) {
-            content = (
-                <ul className='artist-list'>
-                    {
-                        this.state.favoriteArtists.map(function(artist, n) {
-                            artist.favorite = true
-                            return (
-                                <ArtistItem key={n} artist={artist} />
-                            )
-                        })
-                    }
-                </ul>
-            )
-        } else {
-            content = (
-                <p>No favorite artists were picked!</p>
-            )
-        }
+        let content = (this.state.favoriteArtists.length > 0) ?
+            (<ArtistList artistList={this.state.favoriteArtists} isFavoriteList />) :
+            (<p>No favorite artists were picked!</p>);
 
         return (
             <div>
@@ -58,7 +42,7 @@ class FavoritesList extends React.Component {
                 <hr />
                 {content}
             </div>
-        )
+        );
     }
 
 }

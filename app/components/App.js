@@ -1,5 +1,5 @@
 import React from 'react';
-import API from '../lib/api'
+import API from '../lib/API';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
 
@@ -29,13 +29,11 @@ class App extends React.Component {
         if (storedSession !== null) {
 
             let session = JSON.parse(storedSession);
-            console.log('cdm', session)
 
             if (session.loggedIn) {
-                console.log('setting loggedIn from stored session')
-                this.setLoggedIn(session.userData)
+                this.setLoggedIn(session.userData);
             } else {
-                this.setLoggedOut()
+                this.setLoggedOut();
             }
 
         }
@@ -44,43 +42,35 @@ class App extends React.Component {
 
     doLogIn(formData) {
 
-        let that = this
-
         API.post('/user/login', {
             username: formData.username,
             password: formData.password
-        }).then(function(response) {
+        }).then((response) => {
 
             if (response.status === 'ok') {
-
-               that.setLoggedIn(response)
-
+               this.setLoggedIn(response);
             }
 
-        })
+        });
 
 
     }
 
     doLogOut() {
-        console.log('doLogOut')
-        let that = this
 
-        API.post('/user/logout', {}).then(function(response) {
-            console.log('api logout response')
+        API.post('/user/logout', {}).then((response) => {
+
             if (response.status === 'ok') {
-
-                that.setLoggedOut()
-
+                this.setLoggedOut();
             }
 
-        })
+        });
 
 
     }
 
     setLoggedIn(userdata) {
-        console.log('setLoggedIn', userdata)
+
         let state = {
             session: {
                 loggedIn: true,
@@ -95,16 +85,16 @@ class App extends React.Component {
                 { label: 'Search Artists', action: 'search' }
             ],
             currentPage: 'welcome'
-        }
+        };
 
         this.setState(state);
         API.setSession(true, userdata.auth_token);
-        localStorage.setItem('session', JSON.stringify(state.session))
+        localStorage.setItem('session', JSON.stringify(state.session));
 
     }
 
     setLoggedOut() {
-        console.log('setLoggedOut')
+
         let state = {
             session: {
                 loggedIn: false,
@@ -113,19 +103,18 @@ class App extends React.Component {
             },
             menuItems: [],
             currentPage: 'welcome'
-        }
+        };
 
-        API.setSession(false);
-        localStorage.setItem('session', JSON.stringify(state.session))
         this.setState(state);
+        API.setSession(false);
+        localStorage.setItem('session', JSON.stringify(state.session));
 
     }
 
     setNavigation(target) {
-        console.log('setNav', target)
-        let state = this.state;
-        state.currentPage = target;
-        this.setState(state);
+
+        this.state.currentPage = target;
+        this.setState(this.state);
     }
 
     render() {
@@ -135,7 +124,7 @@ class App extends React.Component {
                 <Header appState={this.state} doLogIn={this.doLogIn.bind(this)} doLogOut={this.doLogOut.bind(this)} doNav={this.setNavigation.bind(this)} />
                 <MainSection appState={this.state} doLetsGo={this.setNavigation.bind(this, 'search')} />
             </div>
-        )
+        );
 
     }
 

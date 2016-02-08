@@ -1,6 +1,10 @@
 import 'exports?self.fetch!whatwg-fetch';
-import config from '../config/config'
+import config from '../config/config';
 
+/*
+ * This objects keeps a copy of the app state. Stinks.
+ * This isn't needed with a store like flux or redux
+ */
 class API {
 
     static setSession(loggedIn, token) {
@@ -20,32 +24,32 @@ class API {
         };
 
         if (API.session.loggedIn) {
-            headers.Authorization = API.session.authToken
+            headers.Authorization = API.session.authToken;
         }
 
         return fetch(config.api.backend.url + endpoint, {
             method: method,
             headers: headers,
             body: jsondata
-        }).then(function(response) {
+        }).then((response) => {
 
             if (response.status >= 200 && response.status < 300) {
-                return response.json()
+                return response.json();
             } else {
-                let error = new Error(response.statusText)
-                error.response = response
-                throw error
+                let error = new Error(response.statusText);
+                error.response = response;
+                throw error;
             }
 
         });
     }
 
     static get(endpoint) {
-        return API.request(endpoint, 'get', null)
+        return API.request(endpoint, 'get', null);
     }
 
     static post(endpoint, data) {
-        return API.request(endpoint, 'post', data)
+        return API.request(endpoint, 'post', data);
     }
 
 
@@ -54,6 +58,6 @@ class API {
 API.session = {
     loggedIn: false,
     authToken: null
-}
+};
 
 export default API;

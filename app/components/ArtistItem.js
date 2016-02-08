@@ -1,29 +1,37 @@
 import React from 'react';
-import API from '../lib/api'
+import API from '../lib/API';
 import { NavDropdown, MenuItem, ButtonInput, Image, Glyphicon } from 'react-bootstrap';
 
 class ArtistItem extends React.Component {
 
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             favorite: this.props.artist.favorite,
-        }
+            loading: false
+        };
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ favorite: nextProps.artist.favorite })
+        this.setState({
+            favorite: nextProps.artist.favorite,
+            loading: false
+        });
     }
 
     addFavorite() {
 
-        let that = this;
+        this.state.loading = true;
+        this.setState(this.state);
 
-        API.post('/favorite/add/' + this.props.artist.id).then(function(response) {
+        API.post('/favorite/add/' + this.props.artist.id).then((response) => {
+
+            this.state.loading = false;
 
             if (response.status === 'ok') {
-                that.setState({ favorite: true });
+                this.state.favorite = true;
+                this.setState(this.state);
             }
 
         });
@@ -32,12 +40,16 @@ class ArtistItem extends React.Component {
 
     removeFavorite() {
 
-        let that = this;
+        this.state.loading = true;
+        this.setState(this.state);
 
-        API.post('/favorite/remove/' + this.props.artist.id).then(function(response) {
+        API.post('/favorite/remove/' + this.props.artist.id).then((response) => {
+
+            this.state.loading = false;
 
             if (response.status === 'ok') {
-                that.setState({ favorite: false });
+                this.state.favorite = false;
+                this.setState(this.state);
             }
 
         });
@@ -46,29 +58,33 @@ class ArtistItem extends React.Component {
 
     render() {
 
+        let glyph;
         let action;
 
-        if (this.state.favorite) {
-            action = (
-                <div onClick={this.removeFavorite.bind(this)}>
-                    <Glyphicon glyph='star' />
-                </div>
-            );
+        if (this.state.loading) {
+            glyph = 'refresh animate-rotate';
+            action = null;
+        } else if (this.state.favorite) {
+            glyph = 'star';
+            action = this.removeFavorite.bind(this);
         } else {
-            action = (
-                <div onClick={this.addFavorite.bind(this)}>
-                    <Glyphicon glyph='star-empty' />
-                </div>
-            );
+            glyph = 'star-empty';
+            action = this.addFavorite.bind(this);
         }
+
+        let favoriteButton = (
+            <div onClick={action} className={ 'favorite-button ' + (!action ? 'loading' : '') }>
+                <Glyphicon glyph={glyph} />
+            </div>
+        );
 
         return (
             <li>
                 <Image src={this.props.artist.image_url} thumbnail title={this.props.artist.id} />
                 <h2>{this.props.artist.name}</h2>
-                {action}
+                {favoriteButton}
             </li>
-        )
+        );
     }
 
 }

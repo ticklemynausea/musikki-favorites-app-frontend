@@ -21,6 +21,9 @@
     // Best practices
     //-------------------------------------------------------------------------
 
+    // Semicolons
+    semi: [1, "always"],
+
     // Prevent abbreviated blocks for clarity
     "curly": 2,
 
@@ -100,7 +103,7 @@
 
     "comma-spacing": [2, { "before": false, "after": true }],
 
-    "consistent-this": [2, "that"],
+    "consistent-this": [2, ""],
 
     //"eol-last": 2,
 
